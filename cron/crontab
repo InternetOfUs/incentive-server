@@ -1,0 +1,2 @@
+00 9,21 * * * root /usr/local/bin/python3 /code/test_cron.py >> /code/incentive_cron.log 2>&1
+# Empty line

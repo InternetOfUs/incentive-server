@@ -1,0 +1,12 @@
+FROM nginx:latest
+
+COPY badgr/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY badgr/nginx/incentive.site.conf /etc/nginx/sites-available/
+COPY badgr/nginx/badgr.site.conf /etc/nginx/sites-available/
+
+RUN mkdir -p /etc/nginx/sites-enabled/ \
+    && ln -s /etc/nginx/sites-available/incentive.site.conf /etc/nginx/sites-enabled/ \
+    && ln -s /etc/nginx/sites-available/badgr.site.conf /etc/nginx/sites-enabled/
+
+
+CMD ["nginx", "-g", "daemon off;"]

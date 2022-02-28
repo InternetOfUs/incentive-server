@@ -1,0 +1,117 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./initDB:/docker-entrypoint-initdb.d # creating databases
+    environment:
+      - MYSQL_ROOT_PASSWORD=sod8fuskfjsnfkbs__at4etragfs
+      - MYSQL_PASSWORD=sod8fuskfjsnfkbs__at4etragfs
+      - MYSQL_USER=wenetIncentive
+    networks:
+      - wenet
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: sod8fuskfjsnfkbs__at4etragfs
+    networks:
+      - wenet
+  badgrserver:
+    # build:
+    #   context: .
+      # dockerfile: badgr-server/.docker/Dockerfile.prod.api
+    image: internetofus/incentive_server_badgr:v2.3.4
+    depends_on:
+      - db
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py dist &&
+             python manage.py collectstatic --noinput &&
+             python manage.py loaddata mediafiles/uploads/badges/db.json &&
+             uwsgi --log-master --ini uwsgi.ini
+            "
+    # command: bash -c 'python /badgr_server/manage.py runserver 0.0.0.0:8001'
+    # command: tail -f /dev/null
+    networks:
+      - wenet
+    expose:
+      - "3000"
+    environment:
+      BASE_URL: '/dev/badgr'
+      MYSQL_DATABASE: libraries
+      MYSQL_ROOT_PASSWORD: sod8fuskfjsnfkbs__at4etragfs # TODO check if the root password is needed
+      MYSQL_PASSWORD: sod8fuskfjsnfkbs__at4etragfs
+      MYSQL_USER: root
+      Badger_TOKEN: 379e2625cb642327d62f1cf9bbc6cc53c9a421a8
+      BADGR_HTTP_ORIGIN: https://wenet.u-hopper.com
+      DB: db # host
+      UPLOAD_LIMIT: 3000000000
+      DEBUG: "True" # case sensitive?
+    volumes:
+      - "./badgr/badges:/root/badgr/code/mediafiles/uploads/badges"
+    restart: always
+  cron:
+    image: internetofus/incentive_cron:v1.0.0
+    depends_on:
+      - incentiveserver
+    networks:
+      - wenet
+
+  incentiveserver:
+    privileged: true
+#    build: .
+    image:  internetofus/incentive_server_incentive_server:v2.5.1
+    command: >
+      sh -c "python manage.py migrate &&
+             uwsgi --log-master --ini uwsgi.ini
+             "
+    ports:
+      - "3001"
+    depends_on:
+      - db
+    environment:
+      S3: https://wenetbadgesimages.s3.amazonaws.com/
+      BASE_URL: /dev/incentive_server
+      ENVIRONMENT: dev
+      MYSQL_DATABASE: lassi
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: sod8fuskfjsnfkbs__at4etragfs # TODO check if the root password is needed
+      MYSQL_PASSWORD: sod8fuskfjsnfkbs__at4etragfs
+      Badger_TOKEN: 379e2625cb642327d62f1cf9bbc6cc53c9a421a8
+      DB: db # host # TODO
+      UPLOAD_LIMIT: 3000000000
+      BADGR_DOMAIN: http://nginx:8000/ # TODO
+      INCENTIVE_SERVER_DEBUG: "True"
+      COMP_AUTH_KEY: 7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo
+      PROD_COMP_AUTH_KEY: NC3LVMXK34vtAbzq-RpVsTJ-MyAiO-ZTULud0sWiLwc
+    networks:
+      - wenet
+    restart: always
+
+  nginx:
+    restart: always
+    image: internetofus/incentive_server_nginx
+#    volumes:
+#      - /badgr_server_api:/badgr_server/
+    depends_on:
+      - "incentiveserver"
+    links:
+      - "badgrserver"
+
+    ports:
+      - "8000:8000"
+      - "80:80"
+    networks:
+      - wenet
+
+networks:
+  wenet:

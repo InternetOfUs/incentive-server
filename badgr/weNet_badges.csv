@@ -1,0 +1,10 @@
+image,name,description,criteria,threshold
+https://wenetbadgesimages.s3.amazonaws.com/first_question.png,First question,"You broke the ice, and asked your first question!",Questions,1
+https://wenetbadgesimages.s3.amazonaws.com/curious_level_1.png,Curious level 1,You asked 5 questions to the community!,Questions,5
+https://wenetbadgesimages.s3.amazonaws.com/curious_level_2.png,Curious level 2,"You asked 10 questions from the community, a truly curious mind",Questions,10
+https://wenetbadgesimages.s3.amazonaws.com/first_answer.png,First answer,You took the courage and gave your first answer!,Answers,1
+https://wenetbadgesimages.s3.amazonaws.com/helper_level_1.png,Helper level 1,"You answered 5 questions, sharing your knowledge!",Answers,5
+https://wenetbadgesimages.s3.amazonaws.com/helper_level_2.png,Helper level 2,"You answered 10 questions, helping others with your knowledge!",Answers,10
+https://wenetbadgesimages.s3.amazonaws.com/first_good_answer.png,First Good Answer,You had an answer accepted by someone!,AnswersAccepted,1
+http://wenetbadgesimages.s3.amazonaws.com/good_answers_level_1.png,Good Answers level 1,Three of your answers have been accepted!,AnswersAccepted,3
+https://wenetbadgesimages.s3.amazonaws.com/good_answers_level_2.png,Good Answers level 2,Five of your answers have been accepted!,AnswersAccepted,5
