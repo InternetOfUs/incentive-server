@@ -1,0 +1,15 @@
+tokens:
+  badgr: 379e2625cb642327d62f1cf9bbc6cc53c9a421a8
+
+
+urls:
+    badgr: http://45.83.41.233:8000/
+    create_badge_user: http://45.83.41.233:8000/v1/user/profile
+    passwd: my secret password
+    db: write-math
+other:
+    preprocessing_queue:
+        - preprocessing.scale_and_center
+        - preprocessing.dot_reduction
+        - preprocessing.connect_lines
+    use_anonymous: yes

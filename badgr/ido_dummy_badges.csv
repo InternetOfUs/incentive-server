@@ -1,0 +1,14 @@
+image,badge_name,description,criteriaNarrative,criteria,criteriaActions,appMessage
+,Ask-Ans 1,You asked a question and answered another for the first time!,after first q asked & first q answered,Awarded First question and First answer badges,X,Way to go! You have earned the first Ask-Ans Badge!
+,Ask-Ans 5,"You asked 5 questions and answered 5 others, what a spirit!",after 5 q asked & 5 q answered,Awarded Curious level 1 and Helper level 1 badges,X,"Congratz! You have earned the second Ask-Ans Badge, asking and answering 5 questions"
+,Ask-Ans 10,"You asked 10 questions and answered 10 others, your devotion is appreciated!",after 10 q asked & 10 q answered,Awarded Curious level 2 and Helper level 2 badges,X,"You are on a roll! Here is the third Ask-Ans Badge, for asking and answering 10 questions"
+,,,,,,
+first_question.png,First question,"You broke the ice, and asked your first question!",After first question asked,Questions,1,Congratulations! You just earned the First Question badge! Way to go!
+curious_level_1.png,Curious level 1,You asked 5 questions to the community!,After 5 questions asked,Questions,5,Congratulations! You are Level 1 Curious! Stay hungry and keep asking questions!
+curious_level_2.png,Curious level 2,"You asked 10 questions from the community, a truly curious mind",After 10 questions asked,Questions,10,"Congratulations! You are now Level 2 Curious! Amazing interest in the world, keep asking questions!"
+fisrt_answer.png,First answer,You took the courage and gave your first answer!,After the first answer given,Answers,1,Congratulations! You just earned the First Answer badge! Way to go!
+helper_level_1.png,Helper level 1,"You answered 5 questions, sharing your knowledge!",After 5 answers,Answers,5,Congratulations! You are now Level 1 Helper! Keep sharing your knowledge!
+helper_level_2.png,Helper level 2,"You answered 10 questions, helping others with your knowledge!",After 10 answers given,Answers,10,Congratulations! You are now Level 2 Helper! Keep sharing!
+first_good_answer.png,First Good Answer,You had an answer accepted by someone!,After first accepted answer,AnswersAccepted,1,Congratulations! You just earned your First Good Answer badge! Well done!
+good_answer_level_1.png,Good Answers level 1,Three of your answers have been accepted!,After 3 accepted answers,AnswersAccepted,3,"Congratulations, your answers are appreciated! You just earned your Good Answers Level 1 badge!"
+good_answer_level_2.png,Good Answers level 2,Five of your answers have been accepted!,After 5 accepted answers,AnswersAccepted,5,You keep giving great answers! You just got Good Answers Level 2! Congratulations!
