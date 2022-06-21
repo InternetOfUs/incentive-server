@@ -149,7 +149,13 @@ DATABASES = {
         'HOST': os.environ['DB'],                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
         'OPTIONS': {
-#            "SET character_set_connection=utf8mb3, collation_connection=utf8_unicode_ci",  # Uncomment when using MySQL to ensure consistency across servers
+        #    "SET character_set_connection=utf8mb3, collation_connection=utf8_unicode_ci",  # Uncomment when using MySQL to ensure consistency across servers
+            # "init_command": "SET storage_engine=INNODB, SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED",
+                # 'init_command': 'SET innodb_strict_mode=1',
+                "isolation_level": "READ COMMITTED",
+                # 'ATOMIC_REQUESTS': True,
+
+
         },
     }
 }
@@ -318,15 +324,23 @@ LOGGING = {
 #  Caching
 #
 ##
-
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'KEY_PREFIX': 'badgr_',
-        'VERSION': 10,
-        'TIMEOUT': None,
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'LOCATION': '',
+        'TIMEOUT': 1,
+        'KEY_PREFIX': '',
+        'VERSION': 1,
     }
 }
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+#         'KEY_PREFIX': 'badgr_',
+#         'VERSION': 1,
+#         'TIMEOUT': 1,
+#     }
+# }
 
 ##
 #

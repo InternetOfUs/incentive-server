@@ -28,7 +28,7 @@ services:
   badgrserver:
     # build:
     #   context: .
-      # dockerfile: badgr-server/.docker/Dockerfile.prod.api
+    # dockerfile: badgr-server/.docker/Dockerfile.prod.api
     image: internetofus/incentive_server_badgr:v2.3.4
     depends_on:
       - db
@@ -37,7 +37,7 @@ services:
              python manage.py dist &&
              python manage.py collectstatic --noinput &&
              python manage.py loaddata mediafiles/uploads/badges/db.json &&
-             uwsgi --log-master --ini uwsgi.ini
+             uwsgi --socket=:3000 --processes=1 --threads=1 --chdir=/root/badgr/code --module=wsgi:application 
             "
     # command: bash -c 'python /badgr_server/manage.py runserver 0.0.0.0:8001'
     # command: tail -f /dev/null
@@ -48,7 +48,7 @@ services:
     environment:
       BASE_URL: '/dev/badgr'
       MYSQL_DATABASE: libraries
-      MYSQL_ROOT_PASSWORD: sod8fuskfjsnfkbs__at4etragfs # TODO check if the root password is needed
+      MYSQL_ROOT_PASSWORD: sod8fuskfjsnfkbs__at4etragfs # TODO check if the root passb word is needed
       MYSQL_PASSWORD: sod8fuskfjsnfkbs__at4etragfs
       MYSQL_USER: root
       Badger_TOKEN: 379e2625cb642327d62f1cf9bbc6cc53c9a421a8
@@ -68,8 +68,8 @@ services:
 
   incentiveserver:
     privileged: true
-#    build: .
-    image:  internetofus/incentive_server_incentive_server:v2.5.1
+    #    build: .
+    image: internetofus/incentive_server_incentive_server:v2.5.4
     command: >
       sh -c "python manage.py migrate &&
              uwsgi --log-master --ini uwsgi.ini
@@ -91,8 +91,7 @@ services:
       UPLOAD_LIMIT: 3000000000
       BADGR_DOMAIN: http://nginx:8000/ # TODO
       INCENTIVE_SERVER_DEBUG: "True"
-      COMP_AUTH_KEY: 7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo
-      PROD_COMP_AUTH_KEY: NC3LVMXK34vtAbzq-RpVsTJ-MyAiO-ZTULud0sWiLwc
+      COMP_AUTH_KEY: ttp3N9fe9R-hWsmCAq22xk7pD9YFM7XVC8xRBW-H6j8
     networks:
       - wenet
     restart: always
@@ -100,8 +99,8 @@ services:
   nginx:
     restart: always
     image: internetofus/incentive_server_nginx
-#    volumes:
-#      - /badgr_server_api:/badgr_server/
+    #    volumes:
+    #      - /badgr_server_api:/badgr_server/
     depends_on:
       - "incentiveserver"
     links:

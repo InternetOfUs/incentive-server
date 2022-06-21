@@ -49,6 +49,7 @@ def api_call(url, call, data=None):
     # call should be either 'post', 'put', 'get or 'delete'
     # data is only for 'post' and 'put' calls
     if call == 'post':
+        
         response = requests.post(url,  headers={"Authorization": "Token " + config_list['badgr_token'], "Content-Type": "application/json",
                                                 "x-wenet-component-apikey": config_list['api_key']}, data=json.dumps(data))
         return response

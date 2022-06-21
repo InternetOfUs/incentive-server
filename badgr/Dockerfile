@@ -26,25 +26,27 @@ RUN apt-get install -y git vim sudo curl unzip
 RUN apt-get clean
 RUN apt-get purge
 
-#ADD settings_local.py /root/settings_local.py
-#ADD settings.py /root/settings.py
-#ADD wsgi.py /root/wsgi.py
+# ADD settings_local.py /root/settings_local.py
+# ADD settings.py /root/settings.py
+# ADD wsgi.py /root/wsgi.py
 
 # Install the backend
 
 RUN mkdir ~/badgr \
   && cd ~/badgr \
-  && git clone https://gitlab.com/benzaked/badgr_server.git code \
+  && git clone https://github.com/daniel-izmaylov/badgr_server.git code \
   && cd code \
   && pip install -r requirements.txt
 
+
 RUN cd root/badgr/code
+
 COPY settings.py root/badgr/code/apps/mainsite/
 COPY settings_local.py root/badgr/code/apps/mainsite/
 COPY wsgi.py   root/badgr/code/
 COPY uwsgi.ini              root/badgr/code/
 RUN  pip install django-dotenv \
- && pip install uwsgi
+  && pip install uwsgi
 RUN apt-get install nano
 WORKDIR root/badgr/code
 

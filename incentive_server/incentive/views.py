@@ -22,6 +22,7 @@ from django.http.response import HttpResponseBadRequest
 from django.http import HttpResponse, StreamingHttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import condition
+from django.views.decorators.cache import never_cache
 
 # from rest_framework.decorators import detail_route
 from rest_framework.decorators import action
@@ -81,6 +82,7 @@ class TestPost(APIView):
 
 
 # @csrf_exempt
+# @never_cache
 # def dashStream(request):
 #     # todo i think this is never used, so delete
 #     print("I WAS HERE!!!!!!")
@@ -132,6 +134,7 @@ def debug_messages(request):
     return HttpResponse(status=200)
 
 @csrf_exempt
+@never_cache
 def dash(request):
     return render(request, "dash/pages/dash.html", locals(), )
 def badgesdash(request):
@@ -221,6 +224,7 @@ class IncentiveView(APIView):
 
 
 @csrf_exempt
+@never_cache
 def login(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
@@ -238,6 +242,7 @@ def login(request):
 
 
 @csrf_exempt
+@never_cache
 def incetive_list(request):
     """
     List all code snippets, or create a new snippet.
@@ -282,6 +287,7 @@ def incetive_list(request):
 
 
 @csrf_exempt
+@never_cache
 def incetive_detail(request, pk):
     """
     Retrieve, update or delete a code snippet.
@@ -394,6 +400,7 @@ def list(request):
 
 
 @csrf_exempt
+@never_cache
 def getUserID(request):
     if request.method == 'POST':
         form = getUserForm(request.POST, request.FILES)
@@ -467,12 +474,14 @@ def userProfile(request):
 
 @condition(etag_func=None)
 @csrf_exempt
+@never_cache
 def stream_response(request):
     resp = StreamingHttpResponse(stream_response_generator())
     return resp
 
 
 @csrf_exempt
+@never_cache
 def stream_response_generator2():
     for x in range(1, 11):
         yield x
@@ -480,6 +489,7 @@ def stream_response_generator2():
 
 
 @csrf_exempt
+@never_cache
 def stream_response_generator():
     try:
         conn = django_mysql_connect()
@@ -522,6 +532,7 @@ def stream_response_generator():
 
 
 # @csrf_exempt
+# @never_cache
 # def ask_by_date(request):
 #     try:
 #         return _ask_by_date(request)
@@ -589,6 +600,7 @@ last_update = None
 
 
 @csrf_exempt
+@never_cache
 def mark_latest_id(request):
     conn = django_mysql_connect()
     conn.autocommit(True)
@@ -610,6 +622,7 @@ def django_mysql_connect():
 
 
 @csrf_exempt
+@never_cache
 def get_new_classifications_test(request):
     try:
         return _get_new_classifications_test(request)
@@ -621,6 +634,7 @@ def get_new_classifications_test(request):
 
 
 @csrf_exempt
+@never_cache
 def get_new_classifications(request):
     try:
         return _get_new_classifications(request)
@@ -761,6 +775,7 @@ def create_classification_json(row):
 
 
 @csrf_exempt
+@never_cache
 def GiveRatio(request):
     print ("Give Ratio Requested")
     num_of_leaving = 0
@@ -820,6 +835,7 @@ def sql(query, params):
 
 
 @csrf_exempt
+@never_cache
 def receive_event(request):
     try:
         received_json_data = json.loads(request.body)
@@ -1266,7 +1282,12 @@ class BadgeClass(APIView):
             return respond_json('threshold is required and must to be a positive integer', 400)
 
         # Prevent duplicate BadgeClasses
-        badges = get_all_badges_app(app)['badges']
+        try:
+            badges = get_all_badges_app(app)['badges']
+        except Exception:
+                return respond_json('something went wrong with badger server', 400)
+
+
         for badge in badges:
             if badge.get('name') == data.get('name') or (badge['taskTypeId'] == taskTypeId and badge['label'] == label and badge['threshold'] == threshold):
                return respond_json('Duplicate BadgeClass POST aborted - existing name or existing taskTypeId, label and threshold combination', 400) 

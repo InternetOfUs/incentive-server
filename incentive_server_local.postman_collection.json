@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "22d27df9-df0a-4eb3-a032-a6908a3d497e",
+		"_postman_id": "aad57c00-09aa-458f-8522-83fe5e90b80a",
 		"name": "incentive_server_local",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -250,7 +250,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"test\",\n  \"image\": \"https://c0.klipartz.com/pngpicture/613/564/gratis-png-taxi.png\",\n  \"description\": \"testing\",\n  \"message\": \"testy test\",\n  \"app\": \"xAcauSmrhd\",\n  \"taskTypeId\": \"ask4help\",\n  \"threshold\": 1\n}"
+					"raw": "{\n  \"name\": \"test2\",\n  \"image\": \"https://c0.klipartz.com/pngpicture/613/564/gratis-png-taxi.png\",\n  \"description\": \"בדיקה\",\n  \"message\": \"testy test\",\n  \"app\": \"xAcauSmrhd\",\n  \"taskTypeId\": \"ask4help\",\n  \"threshold\": 20\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/TaskType",
@@ -327,7 +327,7 @@
 					"raw": "{\n\"name\": \"Helper level 2\",\n\"image\": \"https://wenetbadgesimages.s3.amazonaws.com/helper_level_2.png\",\n\"description\": \"You answered 10 questions, helping others with your knowledge!\",\n\"message\": \"Thanks for answering 10 questions!\",\n\"app\": \"I2AFRCOXx3\",\n\"taskTypeId\": \"ask4help\",\n\"label\": \"answerTransaction\",\n\"threshold\": 10\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8001/badges/BadgeClasses/TaskTransaction",
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/TaskTransaction",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -335,7 +335,7 @@
 						"0",
 						"1"
 					],
-					"port": "8001",
+					"port": "8000",
 					"path": [
 						"badges",
 						"BadgeClasses",
@@ -539,7 +539,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8001/badges/BadgeClasses/ic4lpPeMRKWzFFhLT86eUg",
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/ic4lpPeMRKWzFFhLT86eUg",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -547,11 +547,72 @@
 						"0",
 						"1"
 					],
-					"port": "8001",
+					"port": "8000",
 					"path": [
 						"badges",
 						"BadgeClasses",
 						"ic4lpPeMRKWzFFhLT86eUg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All BadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses"
 					]
 				}
 			},
@@ -1023,7 +1084,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/messages/SWUFFCR9WDBMV6RBBCSS4X",
+					"raw": "http://127.0.0.1:8000/messages/YTW3PJ59GE522I67A3L4OK",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1034,7 +1095,53 @@
 					"port": "8000",
 					"path": [
 						"messages",
-						"SWUFFCR9WDBMV6RBBCSS4X"
+						"YTW3PJ59GE522I67A3L4OK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All IncentiveMessage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/TaskType",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"TaskType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All  Issued IncentiveMessage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/Issued",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"Issued"
 					]
 				}
 			},

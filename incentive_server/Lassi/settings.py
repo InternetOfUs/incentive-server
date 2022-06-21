@@ -82,7 +82,7 @@ INSTALLED_APPS = (
 MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -180,6 +180,10 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
                     'init_command': 'SET innodb_strict_mode=1',
+                    "isolation_level": "READ COMMITTED",
+                    # 'ATOMIC_REQUESTS': True
+                        # "init_command": "SET storage_engine=INNODB, SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED",
+
         },
     }
 }
@@ -205,7 +209,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Template Location
-
+214
 if DEBUG:
     MEDIA_URL = '/media/'
     STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "incentive_server/static", "static-only")

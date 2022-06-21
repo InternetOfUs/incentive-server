@@ -91,11 +91,9 @@ class Config(object):
 
         if os.getenv('ENVIRONMENT') == 'beta':  # beta version
             conf_beta['url_badgr'] = 'https://wenet.u-hopper.com/beta/badgr/'
-            conf_beta['api_key'] = os.getenv('BETA_COMP_AUTH_KEY')       
 
         if os.getenv('ENVIRONMENT') == 'prod_test':  # prod testing
-            conf_prod['url_badgr'] = 'https://internetofus.u-hopper.com/prod/badgr/'
-            conf_prod['api_key'] = os.getenv('PROD_COMP_AUTH_KEY')
+            conf_prod['url_badgr'] = 'https://internetofus.u-hopper. /prod/badgr/'
 
         conf['url_wenet_post_incentive'] ='https://wenet.u-hopper.com/dev/interaction_protocol_engine/incentives'
         # conf['url_wenet_post_incentive'] ='https://ardid.iiia.csic.es/wenet/interaction-protocol-engine/incentives'

@@ -34,3 +34,4 @@ AskForHelp_pilot_data/
 AskForHelp_pilot2_data/
 **.ipynb
 docker-compose.dev.yaml
+docker-compose.yaml

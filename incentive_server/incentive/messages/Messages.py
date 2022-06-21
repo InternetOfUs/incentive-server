@@ -91,7 +91,7 @@ logger = logging.getLogger('incentive_server')
 #
 # def there_are_open_questions_user(user, app):
 #    r = requests.get( config_list['url_wenet_get_app_open_tasks'] % app,
-#        headers={"x-wenet-component-apikey": os.environ.get('COMP_AUTH_KEY')})
+#        headers={"x-wenet-component-api key": os.environ.get('COMP_AUTH_KEY')})
 #    if r.status_code != 200:
 #        logger.error(f'error getting open tasks {r.content}')
 #        pass

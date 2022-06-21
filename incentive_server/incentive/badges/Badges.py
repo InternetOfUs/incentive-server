@@ -151,7 +151,7 @@ def get_all_users_badges(user_email):
 
 def get_all_badges():
     response = api_call(config_list['url_badgr'] + config_list['url_get_badges'], 'get')
-
+    
     if response.status_code != 200:
         logger.error(f'something went wrong with badger server: {response.status_code}')
         return {'error': 'something went wrong with badger server', 'status_code': response.status_code}
@@ -241,7 +241,7 @@ def get_user_email_temp(user_id):
 
 def get_badge_details(badge_id):
     response = api_call(config_list['url_badgr'] + config_list['get_badge_class'] % badge_id, 'get')
-
+    
     content = json.loads(response.content)
     try:
         image = list_to_dict(content['result'][0]['tags']).get('imageUrl')

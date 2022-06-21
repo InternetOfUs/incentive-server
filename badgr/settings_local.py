@@ -30,9 +30,9 @@ LANGUAGE_CODE = 'en-us'
 # Example 1: LocMemCache (volatile, but simplest)
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         'LOCATION': '',
-        'TIMEOUT': 300,
+        'TIMEOUT': 1,
         'KEY_PREFIX': '',
         'VERSION': 1,
     }
