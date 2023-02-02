@@ -1,0 +1,1207 @@
+{
+	"info": {
+		"_postman_id": "aad57c00-09aa-458f-8522-83fe5e90b80a",
+		"name": "incentive_server_local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Enable incentive",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"reason\": \"enable incentive server for testing \"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/incentive/enable_incentive",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"incentive",
+						"enable_incentive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disable incentive",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \n  \"reason\": \"enable incentive server for testing \"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/incentive/disable_incentive",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"incentive",
+						"disable_incentive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searches for user incentive info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "user_profile_id",
+						"value": "418b1106-d566-581d-8141-3d0b8f213ed3",
+						"disabled": true
+					},
+					{
+						"key": "k",
+						"value": "3",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/incentive/apps/xAcauSmrhd/users/16",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"incentive",
+						"apps",
+						"xAcauSmrhd",
+						"users",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get list of badges for app",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/badges/apps/xAcauSmrhd",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"badges",
+						"apps",
+						"xAcauSmrhd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Enquiry incentives",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content\": \"the incentive was inappropriate\",\n\t\"incentive\":\"String\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/enquiry_incentives/apps/I2AFRCOXx3/users/46654",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"enquiry_incentives",
+						"apps",
+						"I2AFRCOXx3",
+						"users",
+						"46654"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new badge issuer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"WeNet\",\n  \"email\": \"wenet.badges@gmail.com\",\n  \"description\": \"Here's an issuer_test123\",\n  \"url\": \"http://example.com\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/issuers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"issuers"
+					]
+				},
+				"description": "you have to supply an authorized email - \"wenet.badges@gmail.com\""
+			},
+			"response": []
+		},
+		{
+			"name": "Create TaskTypeBadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-wenet-component-apikey",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"test2\",\n  \"image\": \"https://c0.klipartz.com/pngpicture/613/564/gratis-png-taxi.png\",\n  \"description\": \"בדיקה\",\n  \"message\": \"testy test\",\n  \"app\": \"xAcauSmrhd\",\n  \"taskTypeId\": \"ask4help\",\n  \"threshold\": 20\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/TaskType",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"TaskType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create TaskTransactionBadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-wenet-component-apikey",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Helper level 2\",\n\"image\": \"https://wenetbadgesimages.s3.amazonaws.com/helper_level_2.png\",\n\"description\": \"You answered 10 questions, helping others with your knowledge!\",\n\"message\": \"Thanks for answering 10 questions!\",\n\"app\": \"I2AFRCOXx3\",\n\"taskTypeId\": \"ask4help\",\n\"label\": \"answerTransaction\",\n\"threshold\": 10\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/TaskTransaction",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"TaskTransaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TaskTypeBadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-wenet-component-apikey",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Humpty Dumpty helper 11\",\n\"image\": \"https://static.wikia.nocookie.net/roblox/images/5/56/Humpty_Dumpty.png\",\n\"description\": \"Humpty Dumpty helped 11 times\",\n\"message\": \"Thanks Humpty!\",\n\"app\": \"I2AFRCOXx3\",\n\"taskTypeId\": \"Drives\",\n\"threshold\": 11\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/TaskType/rgf9TByCQL6MARXafNx1hQ",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"TaskType",
+						"rgf9TByCQL6MARXafNx1hQ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TaskTransactionBadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "x-wenet-component-apikey",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Helper level 1\",\n\"image\": \"https://wenetbadgesimages.s3.amazonaws.com/helper_level_1.png\",\n\"description\": \"You answered 5 questions, helping others with your knowledge!\",\n\"message\": \"Thanks for answering 5 questions!\",\n\"app\": \"2kUw54aeVP\",\n\"taskTypeId\": \"ask4help\",\n\"label\": \"answerTransaction\",\n\"threshold\": 5\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/TaskTransaction/uGZ_l4-_THGdK5kJHxSTdQ",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"TaskTransaction",
+						"uGZ_l4-_THGdK5kJHxSTdQ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get BadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/ic4lpPeMRKWzFFhLT86eUg",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"ic4lpPeMRKWzFFhLT86eUg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All BadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete BadgeClass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"BadgeClass entityID obtained\", function () {",
+							"    var result = pm.response.json().result[0]",
+							"    pm.environment.set(\"latest_badgeclass_entity_id\", result.entityId);",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8001/badges/BadgeClasses/ic4lpPeMRKWzFFhLT86eUg",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"ic4lpPeMRKWzFFhLT86eUg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Issue an Assertion to a single recipient",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"recipient\": {\n    \"identity\": \"carlo.caprini@u-hopper.com\",\n    \"type\": \"email\",\n    \"hashed\": true\n  }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/4nL6Pg4nRByan8tbUNBcBg/assertions",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"4nL6Pg4nRByan8tbUNBcBg",
+						"assertions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stream TouchEvent",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"touchevent\": {\n\t\t\"experimentId\": \"wenetTest\",\n                    \"userid\": \"1\",\n                    \"timestamp\": \"2020052105142944\",\n                    \"day\": \"20200521\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/incentive_server/Stream/TouchEvent",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"incentive_server",
+						"Stream",
+						"TouchEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stream SocialRelation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"socialrelations\": {\n\t\t\"experimentid\": \"wenetTest\",\n\t\t\"userid\": \"1\",\n\t\t\"day\": \"20200521\",\n\t\t\"timestamp\": \"202004212357000\",\n\t\t\"source\": \"twitter\",\n\t\t\"content\": {\n\t\t\t\"eventtype\": \"follows\",\n\t\t\t\"value\": \"1\",\n\t\t\t\"userdestinationid\": \"8\"\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/incentive_server/Stream/SocialRelation",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"incentive_server",
+						"Stream",
+						"SocialRelation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST a TaskType Status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-wenet-component-apikey",
+						"value": "NC3LVMXK34vtAbzq-RpVsTJ-MyAiO-ZTULud0sWiLwc",
+						"disabled": true
+					},
+					{
+						"key": "x-wenet-component-apikey",
+						"value": "7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": \"16\",\n  \"community_id\": \"xAcauSmrhd\",\n  \"app_id\": \"xAcauSmrhd\",\n  \"taskTypeId\": \"ask4help\",\n  \"count\": 1\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/Tasks/TaskTypeStatus/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"Tasks",
+						"TaskTypeStatus",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST a TaskTransaction Status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-wenet-component-apikey",
+						"value": "NC3LVMXK34vtAbzq-RpVsTJ-MyAiO-ZTULud0sWiLwc",
+						"disabled": true
+					},
+					{
+						"key": "x-wenet-component-apikey",
+						"value": "7-Egeu4UOfBKH1YjodQDJ4P1XHPsZZa5sb8MfO-evQo",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": \"16\",\n  \"community_id\": \"I2AFRCOXx3\",\n  \"app_id\": \"I2AFRCOXx3\",\n  \"taskTypeId\": \"ask4help\",\n  \"label\": \"answerTransaction\",\n  \"count\": 10\n}"
+				},
+				"url": {
+					"raw": "localhost:8001/Tasks/TaskTransactionStatus/",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"Tasks",
+						"TaskTransactionStatus",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a list of assertions of a BadgeClass",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/badges/BadgeClasses/tg_-yi5_TaCWq_kvwG5_9A/assertions/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"badges",
+						"BadgeClasses",
+						"tg_-yi5_TaCWq_kvwG5_9A",
+						"assertions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Assertion",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Token 379e2625cb642327d62f1cf9bbc6cc53c9a421a8",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"revocation_reason\": \"DELETE BadgeClass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8001/v2/assertions/vMnU2InmSI-MHB62TSbI1Q",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"v2",
+						"assertions",
+						"vMnU2InmSI-MHB62TSbI1Q"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create TaskType IncentiveMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"taskTypeId\": \"ask4help\",\n  \"max_repeat\": 6,\n  \"frequency\": 2,\n  \"app\": \"xAcauSmrhd\",\n  \"message\": \"you are # Questions away from a new badge!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/TaskType",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"TaskType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create TaskTransaction IncentiveMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"taskTypeId\": \"ask4help\",\n  \"label\": \"answerTransaction\",\n  \"max_repeat\": 6,\n  \"frequency\": 2,\n  \"inactivity_period\": 1,\n  \"app\": \"xAcauSmrhd\",\n  \"message\": \"you are # Answers away from a new badge!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/TaskTransaction",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"TaskTransaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TaskTypeIncentiveMessage",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"taskTypeId\": \"ask4help\",\n  \"max_repeat\": 6,\n  \"frequency\": 2,\n  \"inactivity_period\": 1,\n  \"app\": \"xAcauSmrhd\",\n  \"message\": \"you are # Questions away from a new badge!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/TaskType/{entityId}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"TaskType",
+						"{entityId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update TaskTransactionIncentiveMessage",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"taskTypeId\": \"ask4help\",\n  \"label\": \"answerTransaction\",\n  \"max_repeat\": 6,\n  \"frequency\": 2,\n  \"inactivity_period\": 1,\n  \"app\": \"xAcauSmrhd\",\n  \"message\": \"you are # Answers away from a new badge!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/TaskTransaction/{entityId}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"TaskTransaction",
+						"{entityId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get IncentiveMessage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/YTW3PJ59GE522I67A3L4OK",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"YTW3PJ59GE522I67A3L4OK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All IncentiveMessage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/TaskType",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"TaskType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All  Issued IncentiveMessage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/Issued",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"Issued"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete IncentiveMessage",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/messages/{entityId}",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"messages",
+						"{entityId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Debug Messages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/StartIncentivesMassages/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"StartIncentivesMassages",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

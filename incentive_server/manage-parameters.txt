@@ -1,0 +1,3 @@
+migrate
+loaddata db.json
+runserver 8001

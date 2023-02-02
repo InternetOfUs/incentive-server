@@ -1,0 +1,61 @@
+General Terminal
+ping {IP address}
+ipconfig
+
+Django
+python manage.py makemigations
+python manage.py migrate
+python manage.py runserver
+
+Dockerfile (Linux Commands)
+FROM {Docker Hub Image}
+RUN apt-get -y update
+RUN apt-get -y install {libraries - git nano etc.}
+COPY requirements.txt requirements.txt (usually)
+RUN pip install --upgrade pip && pip install -r requirements.txt (accordingly)
+RUN pip install mysqlclient uwsgi (if needed)
+COPY . . (whole folder into container)
+EXPOSE {port, 8000 is customary)
+
+After docker-compose down (SHould do stop instead!! and then start instead of up)
+while read LINE; do export "$LINE"; done < ./local.env
+python manage.py migrate
+python manage.py loaddata db.json
+
+docker & docker-compose Commands
+docker build -t {desired name}
+docker inspect {container name}
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' {container name}
+docker exec -it {container id} bash
+docker ps
+docker network ls
+docker-compose up
+docker compose -f docker-compose -f filename.yaml up
+docker-compose down
+
+sudo kill -SIGTERM pid-of-mysqld-process
+
+add file to image:
+
+export IMAGE_URL=example.com/your_image:your_tag
+docker pull $IMAGE_URL
+docker create --name temp_container $IMAGE_URL
+docker cp /host/path/to/file temp_container:/container/path/to/file
+docker commit temp_container $IMAGE_URL
+docker push $IMAGE_URL
+
+update incentive server image (incentive_server):
+docker build -t internetofus/incentive_server_incentive_server:v2.4.8 .
+ docker push internetofus/incentive_server_incentive_server:v2.4.8
+
+update badgr server image (badgr-server):
+docker build -t internetofus/incentive_server_badgr:v3.0.1 .
+ docker push internetofus/incentive_server_badgr:v3.0.1
+
+badgr_domain:
+dev: http://localhost:8000/
+prod: https://internetofus.u-hopper.com/prod/badgr/
+
+
+
+
