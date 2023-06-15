@@ -65,7 +65,7 @@ The following environmental variables are required to change in .env file  for t
 
 ## Documentation
 
-The APIs documentation is available [here](http://swagger.u-hopper.com/?url=https://bitbucket.org/wenet/wenet-components-documentation/raw/master/sources/wenet-incentive-server-api.json).
+The APIs documentation is available [here](https://raw.githubusercontent.com/InternetOfUs/components-documentation/master/sources/wenet-incentive_server-openapi.json).
 
 
 ## Postman collection
